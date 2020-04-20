@@ -15,17 +15,8 @@ public class HajibootDiApplication
     {
         ApplicationContext ac = SpringApplication.run(HajibootDiApplication.class, args);
         
-        Scanner scnr = new Scanner(System.in);
+        Frontend fe = ac.getBean(Frontend.class);
         
-        System.out.print("Enter 2 numbers like 'a b': ");
-
-        int intA = scnr.nextInt();
-        int intB = scnr.nextInt();
-        
-        Calculator calculator = ac.getBean(Calculator.class);
-        
-        int intResult = calculator.calculate(intA, intB);
-        
-        System.out.println("Result = " + intResult);
+        fe.run();
     }
 }
