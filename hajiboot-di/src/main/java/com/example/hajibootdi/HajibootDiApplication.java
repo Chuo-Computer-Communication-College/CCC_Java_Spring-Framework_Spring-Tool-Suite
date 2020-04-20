@@ -1,5 +1,7 @@
 package com.example.hajibootdi;
 
+import java.util.Scanner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -13,15 +15,16 @@ public class HajibootDiApplication
     {
         ApplicationContext ac = SpringApplication.run(HajibootDiApplication.class, args);
         
+        Scanner scnr = new Scanner(System.in);
+        
         System.out.print("Enter 2 numbers like 'a b': ");
+
+        int intA = scnr.nextInt();
+        int intB = scnr.nextInt();
         
-        ArgumentResolver ar = ac.getBean(ArgumentResolver.class);
+        Calculator calculator = ac.getBean(Calculator.class);
         
-        Argument argmnt = ar.resolve(System.in);
-        
-        Calculator cltr = ac.getBean(Calculator.class);
-        
-        int intResult = cltr.calculate(argmnt.getA(), argmnt.getB());
+        int intResult = calculator.calculate(intA, intB);
         
         System.out.println("Result = " + intResult);
     }

@@ -7,20 +7,14 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration
 {
     @Bean
-    ArgumentResolver argument_resolver()
-    {
-        return new ScannerArgumentResolver();
-    }
-    
-    @Bean
     Calculator calculator()
     {
         return new AdditionCalculator();
     }
     
     @Bean
-    Frontend frontend()
+    ArgumentResolver argument_resolver()
     {
-        return new Frontend();
+        return new ScannerArgumentResolver();
     }
 }
