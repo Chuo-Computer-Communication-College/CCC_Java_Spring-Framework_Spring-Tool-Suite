@@ -1,5 +1,8 @@
 package com.example.hajibootdi;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AdditionCalculator implements Calculator
 {
     @Override
