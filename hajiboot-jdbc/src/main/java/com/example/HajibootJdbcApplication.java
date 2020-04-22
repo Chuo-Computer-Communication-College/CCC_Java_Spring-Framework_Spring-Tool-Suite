@@ -24,10 +24,10 @@ public class HajibootJdbcApplication implements CommandLineRunner
     {
         String strSQL = 
                         "Select " + 
-                            "1 " + 
+                            ":a + :b " + 
                         ";";
         
-        SqlParameterSource pSource = new MapSqlParameterSource();
+        SqlParameterSource pSource = new MapSqlParameterSource().addValue("a", 100).addValue("b", 200);
         
         Integer intResult = npTemplate.queryForObject(strSQL, pSource, Integer.class);
         
