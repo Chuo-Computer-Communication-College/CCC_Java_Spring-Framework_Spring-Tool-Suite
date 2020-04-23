@@ -28,7 +28,7 @@ public class HajibootJdbcApplication implements CommandLineRunner
                         "SELECT " + 
                             "id, " + 
                             "first_name, " + 
-                            "last_name, " + 
+                            "last_name " + 
                         "FROM " + 
                             "customers " + 
                         "WHERE " + 
