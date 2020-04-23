@@ -49,14 +49,8 @@ public class HajibootJdbcApplication implements CommandLineRunner
         (
             strSQL, 
             pSource, 
-            new RowMapper<Customer>()
-            {
-                @Override
-                public Customer mapRow(ResultSet rSet, int RowNumber) throws SQLException
-                {
-                    return new Customer(rSet.getInt("id"), rSet.getString("first_name"), rSet.getString("last_name"));
-                }
-            }
+            (rSet, RowNumber) -> 
+                new Customer(rSet.getInt("id"), rSet.getString("first_name"), rSet.getString("last_name"))
         );
         
         System.out.println("Result = " + cstmrResult);
