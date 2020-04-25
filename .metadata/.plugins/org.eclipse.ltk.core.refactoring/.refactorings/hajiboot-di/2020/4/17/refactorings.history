@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;context&apos; in &apos;com.example.hajibootdi.HajibootDiApplication.main(...)&apos; to &apos;ac&apos;&#x0D;&#x0A;- Original project: &apos;hajiboot-di&apos;&#x0D;&#x0A;- Original element: &apos;com.example.hajibootdi.HajibootDiApplication.main(String[]).context&apos;&#x0D;&#x0A;- Renamed element: &apos;context&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;context&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java&lt;com.example.hajibootdi{HajibootDiApplication.java[HajibootDiApplication~main~\[QString;@context!451!536!470!476!QApplicationContext;!0!false" name="ac" references="true" stamp="1587316357862" version="1.0"/>
+</session>

@@ -1,0 +1,20 @@
+2020-04-23 17:23:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "CUSTOMERS" が見つかりません
+Table "CUSTOMERS" not found; SQL statement:
+SELECT id, first_name, last_name, FROM customers WHERE id = ? ; [42102-200]
+2020-04-23 17:28:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "CUSTOMERS" が見つかりません
+Table "CUSTOMERS" not found; SQL statement:
+SELECT id, first_name, last_name, FROM customers WHERE id = ? ; [42102-200]
+2020-04-23 17:50:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "CUSTOMERS" が見つかりません
+Table "CUSTOMERS" not found; SQL statement:
+SELECT id, first_name, last_name FROM customers WHERE id = ? ; [42102-200]
+2020-04-23 20:20:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "CUSTOMERS" が見つかりません
+Table "CUSTOMERS" not found; SQL statement:
+SELECT id, first_name, last_name FROM customers WHERE id = ? ; [42102-200]
+2020-04-23 20:40:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "CUSTOMERS" が見つかりません
+Table "CUSTOMERS" not found; SQL statement:
+SELECT id, first_name, last_name FROM customers WHERE id = ? ; [42102-200]
