@@ -7,13 +7,13 @@ class DataObject
     private String name;
     private String mail;
     
-    public DataObject(int id, String name, String value)
+    public DataObject(int id, String name, String mail)
     {
         super();
         
         this.id = id;
         this.name = name;
-        this.mail = value;
+        this.mail = mail;
     }
 
     public int getId()
