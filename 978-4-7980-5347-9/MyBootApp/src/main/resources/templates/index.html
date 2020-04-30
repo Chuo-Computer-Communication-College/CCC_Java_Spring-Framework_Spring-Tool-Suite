@@ -13,8 +13,10 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p th:text="#{content.message}">
-      
+    <p>
+      <a th:href="@{'/home/{id}'(id = ${param.id[0]})}">
+        Link
+      </a>
     </p>
   </body>
 </html>
