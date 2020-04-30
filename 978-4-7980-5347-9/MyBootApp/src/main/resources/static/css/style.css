@@ -21,3 +21,22 @@ pre
   font-size: 13pt;
   padding: 5px 10px;
 }
+
+td
+{
+  background: #f0f0f0;
+  color: black;
+  padding: 5px;
+}
+
+th
+{
+  background: darkgray;
+  color: white;
+  padding: 5px;
+}
+
+tr
+{
+  margin: 5px;
+}

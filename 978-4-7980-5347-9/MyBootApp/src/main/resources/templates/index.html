@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" content="Text/HTML" http-equiv="Content-Type">
     <title>
@@ -13,10 +13,34 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p>
-      <a th:href="@{'/home/{id}'(id = ${param.id[0]})}">
-        Link
-      </a>
+    <p th:text="${message}">
+      Message
     </p>
+    <table th:object="${object}">
+      <tr>
+        <th>
+          Id
+        </th>
+        <td th:text="*{id}">
+          
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Name
+        </th>
+        <td th:text="*{name}">
+          
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Mail
+        </th>
+        <td th:text="*{mail}">
+          
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
