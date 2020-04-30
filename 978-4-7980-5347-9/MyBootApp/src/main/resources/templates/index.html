@@ -10,10 +10,10 @@
     </style>
   </head>
   <body>
-    <h1>
+    <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p th:text="'from parameter... id = ' + ${param.id[0]} + ', name = ' + ${param.name[0]}">
+    <p th:text="#{content.message}">
       
     </p>
   </body>
