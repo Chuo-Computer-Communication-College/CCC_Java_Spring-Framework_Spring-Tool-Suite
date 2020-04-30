@@ -18,12 +18,12 @@ public class HelloController
     @RequestMapping("/home")
     public String home()
     {
-        return "forward:";
+        return "forward:/";
     }
     
     @RequestMapping("/other")
     public String other()
     {
-        return "redirect:";
+        return "redirect:/";
     }
 }
