@@ -14,7 +14,11 @@
       Hello Page
     </h1>
     <p class="msg" th:text="${msg}">
-      
+      Please wait...
     </p>
+    <form action="/" method="post">
+      <input type="text" name="text1" th:value="${value}">
+      <input type="submit" value="Click">
+    </form>
   </body>
 </html>
