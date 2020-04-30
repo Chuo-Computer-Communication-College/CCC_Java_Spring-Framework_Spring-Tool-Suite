@@ -12,7 +12,7 @@ public class HelloController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav)
     {        
-        mav.addObject("msg", "お名前を書いて送信してください。");
+        mav.addObject("message", "フォームを送信ください。");
         
         mav.setViewName("index");
         
@@ -20,10 +20,46 @@ public class HelloController
     }
     
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView send(@RequestParam("txtName") String name, ModelAndView mav)
+    public ModelAndView send(
+            @RequestParam(value = "cb", required = false) boolean chkBox,
+            @RequestParam(value = "rdSex", required = false) String rdSex,
+            @RequestParam(value = "slcOS", required = false) String slcOS,
+            @RequestParam(value = "slcMOS", required = false) String[] slcMOS, 
+            ModelAndView mav)
     {
-        mav.addObject("message", "こんにちは、" + name + "さん！");
-        mav.addObject("name", name);
+        String strResolution = "";
+        
+        try
+        {
+            strResolution = 
+                    "chkBox: " + chkBox + System.getProperty("line.separator") + 
+                    "rdSex: " + rdSex + System.getProperty("line.separator") + 
+                    "slcOS: " + slcOS + System.getProperty("line.separator") + 
+                    "slcMOS: ";
+            
+            if (slcMOS == null)
+            {
+                strResolution += "Null";
+            }
+            else
+            {                
+                for (int i = 0; i < slcMOS.length; i++)
+                {
+                    strResolution += slcMOS[i];
+                    
+                    if (i < slcMOS.length - 1)
+                    {
+                        strResolution += ", ";
+                    }
+                }
+            }
+        }
+        catch (NullPointerException e)
+        {
+            // TODO: handle exception
+        }
+        
+        mav.addObject("message", strResolution);
         
         mav.setViewName("index");
         

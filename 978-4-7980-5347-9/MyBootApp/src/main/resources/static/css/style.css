@@ -13,3 +13,11 @@ h1
   font-size: 18pt;
   font-weight: bold;
 }
+
+pre
+{
+	border: 1px solid gray;
+  color: gray;
+  font-size: 13pt;
+  padding: 5px 10px;
+}
