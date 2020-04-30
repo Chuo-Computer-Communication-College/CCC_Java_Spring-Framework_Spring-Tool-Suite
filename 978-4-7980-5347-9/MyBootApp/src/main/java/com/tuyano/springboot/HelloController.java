@@ -1,25 +1,29 @@
 package com.tuyano.springboot;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloController
 {    
-    @RequestMapping("/{number}")
-    public ModelAndView index(@PathVariable int number, ModelAndView mav)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index(ModelAndView mav)
+    {        
+        mav.addObject("msg", "お名前を書いて送信してください。");
+        
+        mav.setViewName("index");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ModelAndView send(@RequestParam("txtName") String name, ModelAndView mav)
     {
-        int intResolution = 0;
-        
-        for (int i = 1; i <= number; i++)
-        {
-            intResolution += i;
-        }
-        
-        mav.addObject("msg", "Total: " + intResolution);
+        mav.addObject("message", "こんにちは、" + name + "さん！");
+        mav.addObject("name", name);
         
         mav.setViewName("index");
         
