@@ -13,50 +13,32 @@
     <h1>
       Hello Page
     </h1>
-    <pre th:text="$(message)">
+    <pre th:text="${message}">
       Please wait...
     </pre>
     <form action="/" method="post">
       <div>
         <input type="checkbox" id="cb" name="cb">
-        <label for="cb">
-                      チェック
-        </label>
+        <label for="cb">チェック</label>
       </div>
       <div>
-        <input type="radio" id="rdMale" name="rd" value="Male">
-        <label for="rdMan">
-                      男性
-        </label>
+        <input type="radio" id="rdMale" name="rdSex" value="Male">
+        <label for="rdMan">男性</label>
       </div>
       <div>
-        <input type="radio" id="rdFemale" name="rd" value="Female">
-        <label for="rdWoman">
-                      女性
-        </label>
+        <input type="radio" id="rdFemale" name="rdSex" value="Female">
+        <label for="rdWoman">女性</label>
       </div>
       <div>
-        <select id="slcOS" name="slc" size="4">
-          <option value="Linux">
-            Linux
-          </option>
-          <option value="Mac">
-            Mac
-          </option>
-          <option value="Windows">
-            Windows
-          </option>
+        <select id="slcOS" name="slcOS" size="4">
+          <option value="Linux">Linux</option>
+          <option value="Mac">Mac</option>
+          <option value="Windows">Windows</option>
         </select>
-        <select id="slcMOS" name="slc" multiple="multiple" size="4">
-          <option value="Android">
-            Android
-          </option>
-          <option value="iPhone">
-            iPhone
-          </option>
-          <option value="Windows Phone">
-            Windows Phone
-          </option>
+        <select id="slcMOS" name="slcMOS" multiple="multiple" size="4">
+          <option value="Android">Android</option>
+          <option value="iPhone">iPhone</option>
+          <option value="Windows Phone">Windows Phone</option>
         </select>
       </div>
       <input type="submit" value="Click">
