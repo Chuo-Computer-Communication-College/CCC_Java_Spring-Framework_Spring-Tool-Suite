@@ -13,10 +13,8 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <div th:object="${object}">
-      <p th:text="|My name is *{name}. E-Mail address is *{mail}.|">
-        Message
-      </p>
-    </div>
+    <p th:utext="${message}">
+      Message
+    </p>
   </body>
 </html>
