@@ -13,34 +13,10 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p th:text="${message}">
-      Message
-    </p>
-    <table th:object="${object}">
-      <tr>
-        <th>
-          Id
-        </th>
-        <td th:text="*{id}">
-          
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Name
-        </th>
-        <td th:text="*{name}">
-          
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Mail
-        </th>
-        <td th:text="*{mail}">
-          
-        </td>
-      </tr>
-    </table>
+    <div th:object="${object}">
+      <p th:text="|My name is *{name}. E-Mail address is *{mail}.|">
+        Message
+      </p>
+    </div>
   </body>
 </html>

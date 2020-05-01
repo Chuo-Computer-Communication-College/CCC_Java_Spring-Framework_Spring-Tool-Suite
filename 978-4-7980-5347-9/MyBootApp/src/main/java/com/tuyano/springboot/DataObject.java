@@ -3,7 +3,7 @@ package com.tuyano.springboot;
 class DataObject
 {
     private int id;
-
+    
     private String name;
     private String mail;
     
