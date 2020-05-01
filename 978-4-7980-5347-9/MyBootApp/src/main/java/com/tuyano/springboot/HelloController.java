@@ -12,9 +12,9 @@ public class HelloController
     public ModelAndView index(ModelAndView mav, @PathVariable int id)
     {
         mav.addObject("id", id);
-        mav.addObject("check", id % 2 == 0);
-        mav.addObject("true_val", "Even Number");
-        mav.addObject("false_val", "Odd Number");
+        mav.addObject("check", id >= 0);
+        mav.addObject("true_val", "Positive!");
+        mav.addObject("false_val", "Negative...");
         
         mav.setViewName("index");
         
