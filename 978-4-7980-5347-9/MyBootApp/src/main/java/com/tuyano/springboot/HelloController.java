@@ -1,22 +1,24 @@
 package com.tuyano.springboot;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloController
 {    
-    @RequestMapping("/{month}")
-    public ModelAndView index(ModelAndView mav, @PathVariable int month)
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav)
     {
-        int intMonth = Math.abs(month) % 12;
+        ArrayList<String[]> alData = new ArrayList<String[]>();
+
+        alData.add(new String[]{"Taro", "taro@yamada", "090-999-999"});
+        alData.add(new String[]{"Hanako", "hanako@flower", "080-888-888"});
+        alData.add(new String[]{"Sachiko", "sachiko@happy", "070-777-777"});
         
-        intMonth = intMonth == 0 ? 12 : intMonth;
-        
-        mav.addObject("month", intMonth);
-        mav.addObject("check", Math.floor(intMonth / 3));
+        mav.addObject("data", alData);
         
         mav.setViewName("index");
         
