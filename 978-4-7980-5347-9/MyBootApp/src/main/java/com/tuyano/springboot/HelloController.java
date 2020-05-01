@@ -10,10 +10,7 @@ public class HelloController
     @RequestMapping("/")
     public ModelAndView index(ModelAndView mav)
     {
-        DataObject dObject = new DataObject(123, "Hanako", "hanako@flower");
-
-        mav.addObject("message", "Current Data");
-        mav.addObject("object", dObject);
+        mav.addObject("message", "Message 1<hr/>Message 2<br/>Message 3");
         
         mav.setViewName("index");
         
