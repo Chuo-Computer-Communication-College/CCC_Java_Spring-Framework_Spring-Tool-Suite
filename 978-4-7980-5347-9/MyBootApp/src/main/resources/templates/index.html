@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" content="Text/HTML" http-equiv="Content-Type">
     <title>
@@ -8,34 +8,26 @@
     <link type="Text/CSS" rel="StyleSheet" th:href="@{/css/style.css}">
     <style>
     </style>
+    <script th:inline="JavaScript">
+      function action()
+      {
+      	var price = document.getElementById("txtPrice").value;
+      	var resolution = parseInt(price * ((100 + /*[[${tax}]]*/) / 100));
+      	
+      	document.getElementById("msg").innerHTML = "Include Tax: " + resolution;
+      }
+    </script>
   </head>
   <body>
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <table th:inline="text">
-      <tr>
-        <th>
-          Id
-        </th>
-        <th>
-          Name
-        </th>
-        <th>
-          E-Mail
-        </th>
-      </tr>
-      <tr th:each="obj : ${data}">
-        <td>
-          [[${obj.id}]]
-        </td>
-        <td>
-          [[${obj.name}]]
-        </td>
-        <td>
-          [[${obj.mail}]]
-        </td>
-      </tr>
-    </table>
+    <p id="msg">
+      
+    </p>
+    <input type="text" id="txtPrice">
+    <button onclick="action()">
+      Click
+    </button>
   </body>
 </html>
