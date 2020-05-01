@@ -13,26 +13,31 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <table>
+    <p th:text="|Expression: [${check}]|">
+      
+    </p>
+    <table th:object="${data.get(__${check}__)}">
+      <tr>
+        <th>
+          Id
+        </th>
+        <td th:text="*{id}">
+          
+        </td>
+      </tr>
       <tr>
         <th>
           Name
         </th>
+        <td th:text="*{name}">
+          
+        </td>
+      </tr>
+      <tr>
         <th>
           E-Mail
         </th>
-        <th>
-          Tel.
-        </th>
-      </tr>
-      <tr th:each="obj : ${data}">
-        <td th:text="${obj[0]}">
-          
-        </td>
-        <td th:text="${obj[1]}">
-          
-        </td>
-        <td th:text="${obj[2]}">
+        <td th:text="*{mail}">
           
         </td>
       </tr>
