@@ -8,13 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloController
 {    
-    @RequestMapping("/{id}")
-    public ModelAndView index(ModelAndView mav, @PathVariable int id)
+    @RequestMapping("/{month}")
+    public ModelAndView index(ModelAndView mav, @PathVariable int month)
     {
-        mav.addObject("id", id);
-        mav.addObject("check", id >= 0);
-        mav.addObject("true_val", "Positive!");
-        mav.addObject("false_val", "Negative...");
+        int intMonth = Math.abs(month) % 12;
+        
+        intMonth = intMonth == 0 ? 12 : intMonth;
+        
+        mav.addObject("month", intMonth);
+        mav.addObject("check", Math.floor(intMonth / 3));
         
         mav.setViewName("index");
         
