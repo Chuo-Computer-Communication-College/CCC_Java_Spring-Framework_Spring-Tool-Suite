@@ -13,7 +13,10 @@
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p th:text="${id} + ' is ' + (${check} ? ${true_val} : ${false_val})">
+    <p th:if="${check}" th:text="${id} + ' is ' + ${true_val}">
+      Message
+    </p>
+    <p th:unless="${check}" th:text="${id} + ' is ' + ${false_val}">
       Message
     </p>
   </body>
