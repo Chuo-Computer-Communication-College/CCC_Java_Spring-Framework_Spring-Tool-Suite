@@ -6,28 +6,17 @@
       Top Page
     </title>
     <link type="Text/CSS" rel="StyleSheet" th:href="@{/css/style.css}">
-    <style>
+    <style th:include="part::frag_style">
     </style>
-    <script th:inline="JavaScript">
-      function action()
-      {
-      	var price = document.getElementById("txtPrice").value;
-      	var resolution = parseInt(price * ((100 + /*[[${tax}]]*/) / 100));
-      	
-      	document.getElementById("msg").innerHTML = "Include Tax: " + resolution;
-      }
-    </script>
   </head>
   <body>
     <h1 th:text="#{content.title}">
       Hello Page
     </h1>
-    <p id="msg">
-      
-    </p>
-    <input type="text" id="txtPrice">
-    <button onclick="action()">
-      Click
-    </button>
+    <div th:include="part::frag_body">
+      <p>
+        This is original content.
+      </p>
+    </div>
   </body>
 </html>
