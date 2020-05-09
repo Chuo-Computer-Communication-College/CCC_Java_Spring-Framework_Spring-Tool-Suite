@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" content="Text/HTML" http-equiv="Content-Type">
+    <title>
+      Part Page
+    </title>
+    <style th:fragment="frag_style">
+      div.fragment
+      {
+        border: solid 3px lightgray;
+        padding: 0px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Part Page
+    </h1>
+    <div th:fragment="frag_body">
+      <h2>
+        Fragment
+      </h2>
+      <div class="fragment">
+        <p>
+          This is fragment content.
+        </p>
+        <p>
+          Sample message...
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
