@@ -1,5 +1,7 @@
 package com.tuyano.springboot;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,5 +38,39 @@ public class HelloController
         mdRepository.saveAndFlush(md);
         
         return new ModelAndView("redirect:/");
+    }
+    
+    @PostConstruct
+    public void init()
+    {
+        /* １つ目のダミーデータ作成 */
+        MyData md1 = new MyData();
+        
+        md1.setName("Tuyano");
+        md1.setAge(123);
+        md1.setMail("shoda@tuyano.com");
+        md1.setMemo("This is my data!");
+        
+        mdRepository.saveAndFlush(md1);
+
+        /* ２つ目のダミーデータ作成 */
+        MyData md2 = new MyData();
+        
+        md2.setName("Hanako");
+        md2.setAge(15);
+        md2.setMail("hanako@flower");
+        md2.setMemo("This is my girl friend.");
+        
+        mdRepository.saveAndFlush(md2);
+
+        /* ３つ目のダミーデータ作成 */
+        MyData md3 = new MyData();
+        
+        md3.setName("Sachiko");
+        md3.setAge(37);
+        md3.setMail("sachiko@happy");
+        md3.setMemo("This is my work friend...");
+        
+        mdRepository.saveAndFlush(md3);
     }
 }
