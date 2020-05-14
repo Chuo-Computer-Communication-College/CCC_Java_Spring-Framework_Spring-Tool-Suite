@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tuyano.springboot.repositories.MyDataRepository;
@@ -95,6 +96,28 @@ public class HelloController
     public ModelAndView update(ModelAndView mav, @ModelAttribute MyData md)
     {
         mdRepository.saveAndFlush(md);
+        
+        return new ModelAndView("redirect:/");
+    }
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(ModelAndView mav, @PathVariable int id)
+    {
+        Optional<MyData> optMyData = mdRepository.findById((long)id);
+
+        mav.addObject("title", "Delete MyData.");
+        mav.addObject("formModel", optMyData.get());
+        
+        mav.setViewName("delete");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @Transactional(readOnly = false)
+    public ModelAndView remove(ModelAndView mav, @RequestParam long id)
+    {
+        mdRepository.deleteById(id);
         
         return new ModelAndView("redirect:/");
     }
