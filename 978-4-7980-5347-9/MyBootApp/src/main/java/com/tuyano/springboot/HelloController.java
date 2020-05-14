@@ -1,11 +1,14 @@
 package com.tuyano.springboot;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -72,5 +75,27 @@ public class HelloController
         md3.setMemo("This is my work friend...");
         
         mdRepository.saveAndFlush(md3);
+    }
+    
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(ModelAndView mav, @ModelAttribute MyData md, @PathVariable int id)
+    {
+        Optional<MyData> optMyData = mdRepository.findById((long)id);
+
+        mav.addObject("title", "Edit MyData.");
+        mav.addObject("formModel", optMyData.get());
+        
+        mav.setViewName("edit");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @Transactional(readOnly = false)
+    public ModelAndView update(ModelAndView mav, @ModelAttribute MyData md)
+    {
+        mdRepository.saveAndFlush(md);
+        
+        return new ModelAndView("redirect:/");
     }
 }
