@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,13 @@ public class HelloController
     MyDataRepository mdRepository;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelAndView mav, @ModelAttribute("formModel") MyData md)
+    public ModelAndView index(@ModelAttribute("formModel") MyData md, ModelAndView mav)
     {
-        Iterable<MyData> itrMyData = mdRepository.findAll();
+        Iterable<MyData> iteMyData = mdRepository.findAll();
 
-        mav.addObject("Message", "This is sample content.");
-        mav.addObject("DataList", itrMyData);
+        mav.addObject("message", "This is sample content.");
+        mav.addObject("formModel", md);
+        mav.addObject("dataList", iteMyData);
         
         mav.setViewName("index");
         
@@ -37,11 +40,29 @@ public class HelloController
     
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @Transactional(readOnly = false)
-    public ModelAndView form(ModelAndView mav, @ModelAttribute("formModel") MyData md)
+    public ModelAndView form(@ModelAttribute("formModel") @Validated MyData md, BindingResult bResult, ModelAndView mav)
     {
-        mdRepository.saveAndFlush(md);
+        ModelAndView mavResolution = null;
         
-        return new ModelAndView("redirect:/");
+        if (bResult.hasErrors())
+        {
+            Iterable<MyData> iteMyData = mdRepository.findAll();
+
+            mav.addObject("message", "Sorry, error is occured...");
+            mav.addObject("dataList", iteMyData);
+            
+            mav.setViewName("index");
+            
+            mavResolution = mav;
+        }
+        else
+        {
+            mdRepository.saveAndFlush(md);
+            
+            mavResolution = new ModelAndView("redirect:/");
+        }
+        
+        return mavResolution;
     }
     
     @PostConstruct
@@ -79,7 +100,7 @@ public class HelloController
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(ModelAndView mav, @ModelAttribute MyData md, @PathVariable int id)
+    public ModelAndView edit(@ModelAttribute MyData md, @PathVariable int id, ModelAndView mav)
     {
         Optional<MyData> optMyData = mdRepository.findById((long)id);
 
@@ -93,7 +114,7 @@ public class HelloController
     
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @Transactional(readOnly = false)
-    public ModelAndView update(ModelAndView mav, @ModelAttribute MyData md)
+    public ModelAndView update(@ModelAttribute MyData md, ModelAndView mav)
     {
         mdRepository.saveAndFlush(md);
         
@@ -101,7 +122,7 @@ public class HelloController
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView delete(ModelAndView mav, @PathVariable int id)
+    public ModelAndView delete(@PathVariable int id, ModelAndView mav)
     {
         Optional<MyData> optMyData = mdRepository.findById((long)id);
 
@@ -115,7 +136,7 @@ public class HelloController
     
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Transactional(readOnly = false)
-    public ModelAndView remove(ModelAndView mav, @RequestParam long id)
+    public ModelAndView remove(@RequestParam long id, ModelAndView mav)
     {
         mdRepository.deleteById(id);
         

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.err
+{
+  color: red;
+}
+
 body
 {
   color: gray;
