@@ -3,8 +3,6 @@ package com.tuyano.springboot;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +21,6 @@ import com.tuyano.springboot.repositories.MyDataRepository;
 @Controller
 public class HelloController
 {
-    @PersistenceContext
-    EntityManager eManager;
-    
     MyDataDaoImpl mdDAO;
     
     @Autowired
@@ -74,8 +69,6 @@ public class HelloController
     @PostConstruct
     public void init()
     {
-        mdDAO = new MyDataDaoImpl(eManager);
-        
         /* １つ目のダミーデータ作成 */
         MyData md1 = new MyData();
         
