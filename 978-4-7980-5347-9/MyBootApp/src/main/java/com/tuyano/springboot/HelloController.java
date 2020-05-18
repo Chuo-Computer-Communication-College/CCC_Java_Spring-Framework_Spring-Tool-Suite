@@ -3,6 +3,8 @@ package com.tuyano.springboot;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,16 +23,20 @@ import com.tuyano.springboot.repositories.MyDataRepository;
 @Controller
 public class HelloController
 {
+    @PersistenceContext
+    EntityManager eManager;
+    
+    MyDataDaoImpl mdDAO;
+    
     @Autowired
     MyDataRepository mdRepository;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(@ModelAttribute("formModel") MyData md, ModelAndView mav)
+    public ModelAndView index(ModelAndView mav)
     {
-        Iterable<MyData> iteMyData = mdRepository.findAll();
+        Iterable<MyData> iteMyData = mdDAO.getAll();
 
-        mav.addObject("message", "This is sample content.");
-        mav.addObject("formModel", md);
+        mav.addObject("message", "MyDataのサンプルです。");
         mav.addObject("dataList", iteMyData);
         
         mav.setViewName("index");
@@ -68,13 +74,15 @@ public class HelloController
     @PostConstruct
     public void init()
     {
+        mdDAO = new MyDataDaoImpl(eManager);
+        
         /* １つ目のダミーデータ作成 */
         MyData md1 = new MyData();
         
         md1.setName("Tuyano");
         md1.setAge(123);
         md1.setMail("shoda@tuyano.com");
-        md1.setMemo("This is my data!");
+        md1.setMemo("090999999");
         
         mdRepository.saveAndFlush(md1);
 
@@ -84,7 +92,7 @@ public class HelloController
         md2.setName("Hanako");
         md2.setAge(15);
         md2.setMail("hanako@flower");
-        md2.setMemo("This is my girl friend.");
+        md2.setMemo("080888888");
         
         mdRepository.saveAndFlush(md2);
 
@@ -94,7 +102,7 @@ public class HelloController
         md3.setName("Sachiko");
         md3.setAge(37);
         md3.setMail("sachiko@happy");
-        md3.setMemo("This is my work friend...");
+        md3.setMemo("070777777");
         
         mdRepository.saveAndFlush(md3);
     }
