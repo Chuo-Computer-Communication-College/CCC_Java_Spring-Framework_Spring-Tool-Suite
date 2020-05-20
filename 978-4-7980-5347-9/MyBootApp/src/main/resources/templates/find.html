@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" content="Text/HTML" http-equiv="Content-Type">
+    <title>
+      Find Page
+    </title>
+  </head>
+  <body>
+    <h1 th:text="${title}">
+      Find Page 
+    </h1>
+    <p th:text="${message}">
+      
+    </p>
+    <form action="/find" method="post">
+      <table>
+        <tr>
+          <td>
+            Find:
+          </td>
+          <td>
+            <input type="text" name="fstr" size="20" th:value="${value}">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            
+          </td>
+          <td>
+            <input type="submit">
+          </td>
+        </tr>
+      </table>
+    </form>
+    <hr>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>名前</th>
+        <th>メール</th>
+        <th>年齢</th>
+      </tr>
+      <tr th:each="obj : ${dataList}">
+        <td th:text="${obj.id}"></td>
+        <td th:text="${obj.name}"></td>
+        <td th:text="${obj.mail}"></td>
+        <td th:text="${obj.age}"></td>
+      </tr>
+    </table>
+  </body>
+</html>

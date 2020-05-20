@@ -3,6 +3,7 @@ package com.tuyano.springboot;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +30,9 @@ public class HelloController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav)
     {
-        Iterable<MyData> iteMyData = mdDAO.getAll();
+        Iterable<MyData> iteMyData = mdRepository.findAllOrderByName();
 
+        mav.addObject("title", "Find Page");
         mav.addObject("message", "MyDataのサンプルです。");
         mav.addObject("dataList", iteMyData);
         
@@ -64,40 +66,6 @@ public class HelloController
         }
         
         return mavResolution;
-    }
-    
-    @PostConstruct
-    public void init()
-    {
-        /* １つ目のダミーデータ作成 */
-        MyData md1 = new MyData();
-        
-        md1.setName("Tuyano");
-        md1.setAge(123);
-        md1.setMail("shoda@tuyano.com");
-        md1.setMemo("090999999");
-        
-        mdRepository.saveAndFlush(md1);
-
-        /* ２つ目のダミーデータ作成 */
-        MyData md2 = new MyData();
-        
-        md2.setName("Hanako");
-        md2.setAge(15);
-        md2.setMail("hanako@flower");
-        md2.setMemo("080888888");
-        
-        mdRepository.saveAndFlush(md2);
-
-        /* ３つ目のダミーデータ作成 */
-        MyData md3 = new MyData();
-        
-        md3.setName("Sachiko");
-        md3.setAge(37);
-        md3.setMail("sachiko@happy");
-        md3.setMemo("070777777");
-        
-        mdRepository.saveAndFlush(md3);
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -142,5 +110,78 @@ public class HelloController
         mdRepository.deleteById(id);
         
         return new ModelAndView("redirect:/");
+    }
+    
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public ModelAndView find(ModelAndView mav)
+    {
+        Iterable<MyData> iteMyData = mdDAO.getAll();
+        
+        mav.addObject("title", "Find Page");
+        mav.addObject("message", "MyDataのサンプルです。");
+        mav.addObject("value", "");
+        mav.addObject("dataList", iteMyData);
+        
+        mav.setViewName("find");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    public ModelAndView search(HttpServletRequest sRequest, ModelAndView mav)
+    {
+        String strParam = sRequest.getParameter("fstr");
+        
+        if (strParam == "")
+        {
+            mav = new ModelAndView("redirect:/find");
+        }
+        else
+        {
+            Iterable<MyData> iteMyData = mdDAO.find(strParam);
+            
+            mav.addObject("title", "Find Result");
+            mav.addObject("message", "「" + strParam + "」の検索結果");
+            mav.addObject("value", strParam);
+            mav.addObject("dataList", iteMyData);
+        }
+        
+        mav.setViewName("find");
+        
+        return mav;
+    }
+    
+    @PostConstruct
+    public void init()
+    {
+        /* １つ目のダミーデータ作成 */
+        MyData md1 = new MyData();
+        
+        md1.setName("Tuyano");
+        md1.setAge(123);
+        md1.setMail("shoda@tuyano.com");
+        md1.setMemo("090999999");
+        
+        mdRepository.saveAndFlush(md1);
+
+        /* ２つ目のダミーデータ作成 */
+        MyData md2 = new MyData();
+        
+        md2.setName("Hanako");
+        md2.setAge(15);
+        md2.setMail("hanako@flower");
+        md2.setMemo("080888888");
+        
+        mdRepository.saveAndFlush(md2);
+
+        /* ３つ目のダミーデータ作成 */
+        MyData md3 = new MyData();
+        
+        md3.setName("Sachiko");
+        md3.setAge(37);
+        md3.setMail("sachiko@happy");
+        md3.setMemo("070777777");
+        
+        mdRepository.saveAndFlush(md3);
     }
 }
