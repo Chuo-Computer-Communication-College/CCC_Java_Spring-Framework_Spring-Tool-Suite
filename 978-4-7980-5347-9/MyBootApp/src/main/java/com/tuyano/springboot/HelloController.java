@@ -152,7 +152,7 @@ public class HelloController
     }
     
     @PostConstruct
-    public void init()
+    public void initialize()
     {
         /* １つ目のダミーデータ作成 */
         MyData md1 = new MyData();
