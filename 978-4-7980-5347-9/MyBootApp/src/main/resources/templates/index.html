@@ -8,6 +8,24 @@
     <link type="Text/CSS" rel="StyleSheet" th:href="@{/css/style.css}">
     <style th:include="part::frag_style">
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jauery.min.js">
+    
+    </script>
+    <script th:inline="JavaScript">
+$(document).ready(function()
+{
+  var number = |*[[${param.id[0]}]]*|;
+});
+
+function callback(result)
+{
+  $('#obj').append('<li>id: ' + result.id + '</li>');
+  $('#obj').append('<li>name: ' + result.name + '</li>');
+  $('#obj').append('<li>mail: ' + result.mail + '</li>');
+  $('#obj').append('<li>age: ' + result.age + '</li>');
+  $('#obj').append('<li>memo: ' + result.memo + '</li>');
+}
+    </script>
   </head>
   <body>
     <h1 th:text="#{content.title}">
@@ -16,6 +34,9 @@
     <p th:text="${message}">
       
     </p>
+    <ol id="obj">
+    
+    </ol>
     <table>
       <tr>
         <th>Id</th>
