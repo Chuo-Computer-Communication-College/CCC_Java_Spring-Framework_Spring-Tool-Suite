@@ -16,6 +16,7 @@ public class MyDataDaoImpl implements MyDataDao<MyData>
 {
     private static final long SERIAL_VERSION_UID = 1L;
 
+    @PersistenceContext
     EntityManager eManager;
     
     @Autowired
