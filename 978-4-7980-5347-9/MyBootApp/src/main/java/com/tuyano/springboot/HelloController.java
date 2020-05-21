@@ -1,5 +1,6 @@
 package com.tuyano.springboot;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +23,8 @@ import com.tuyano.springboot.repositories.MyDataRepository;
 @Controller
 public class HelloController
 {
-    MyDataDaoImpl mdDAO;
+    @Autowired
+    private MyDataService mdService;
     
     @Autowired
     MyDataRepository mdRepository;
@@ -30,11 +32,11 @@ public class HelloController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav)
     {
-        Iterable<MyData> iteMyData = mdRepository.findAllOrderByName();
+        List<MyData> lstMyData = mdService.getAll();
 
         mav.addObject("title", "Find Page");
         mav.addObject("message", "MyDataのサンプルです。");
-        mav.addObject("dataList", iteMyData);
+        mav.addObject("dataList", lstMyData);
         
         mav.setViewName("index");
         
@@ -115,12 +117,12 @@ public class HelloController
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public ModelAndView find(ModelAndView mav)
     {
-        Iterable<MyData> iteMyData = mdDAO.getAll();
-        
+        List<MyData> lstMyData = mdService.getAll();
+
         mav.addObject("title", "Find Page");
         mav.addObject("message", "MyDataのサンプルです。");
         mav.addObject("value", "");
-        mav.addObject("dataList", iteMyData);
+        mav.addObject("dataList", lstMyData);
         
         mav.setViewName("find");
         
@@ -138,12 +140,12 @@ public class HelloController
         }
         else
         {
-            Iterable<MyData> iteMyData = mdDAO.find(strParam);
+            List<MyData> lstMyData = mdService.find(strParam);
             
             mav.addObject("title", "Find Result");
             mav.addObject("message", "「" + strParam + "」の検索結果");
             mav.addObject("value", strParam);
-            mav.addObject("dataList", iteMyData);
+            mav.addObject("dataList", lstMyData);
         }
         
         mav.setViewName("find");
