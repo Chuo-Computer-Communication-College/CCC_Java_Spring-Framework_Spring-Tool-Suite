@@ -13,6 +13,15 @@ public class MyDataRestController
     @Autowired
     private MyDataService mdService;
     
+    @Autowired
+    MySampleBean msBean;
+    
+    @RequestMapping("/count")
+    public int count()
+    {
+        return msBean.count();
+    }
+    
     @RequestMapping("/rest")
     public List<MyData> restAll()
     {
