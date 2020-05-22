@@ -27,6 +27,9 @@ public class HelloController
     private MyDataService mdService;
     
     @Autowired
+    MyDataBean mdBean;
+    
+    @Autowired
     MyDataRepository mdRepository;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -39,6 +42,23 @@ public class HelloController
         mav.addObject("dataList", lstMyData);
         
         mav.setViewName("index");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView indexById(@PathVariable long id, ModelAndView mav)
+    {
+        String strTable = 
+                            "<table>" + 
+                                mdBean.getTableTagById(id) + 
+                            "<table>";
+
+        mav.addObject("title", "Pickup Page");
+        mav.addObject("message", "Pickup Data Id = " + id);
+        mav.addObject("data", strTable);
+        
+        mav.setViewName("pickup");
         
         return mav;
     }
