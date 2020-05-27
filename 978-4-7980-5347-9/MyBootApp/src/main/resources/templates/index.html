@@ -6,26 +6,6 @@
       Top Page
     </title>
     <link type="Text/CSS" rel="StyleSheet" th:href="@{/css/style.css}">
-    <style th:include="part::frag_style">
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jauery.min.js">
-    
-    </script>
-    <script th:inline="JavaScript">
-$(document).ready(function()
-{
-  var number = |*[[${param.id[0]}]]*|;
-});
-
-function callback(result)
-{
-  $('#obj').append('<li>id: ' + result.id + '</li>');
-  $('#obj').append('<li>name: ' + result.name + '</li>');
-  $('#obj').append('<li>mail: ' + result.mail + '</li>');
-  $('#obj').append('<li>age: ' + result.age + '</li>');
-  $('#obj').append('<li>memo: ' + result.memo + '</li>');
-}
-    </script>
   </head>
   <body>
     <h1 th:text="#{content.title}">
@@ -34,33 +14,48 @@ function callback(result)
     <p th:text="${message}">
       
     </p>
-    <ol id="obj">
-    
-    </ol>
+    <form action="/" method="post">
+      <table>
+        <tr>
+          <td>
+            <label for="name">名前</label>
+          </td>
+          <td>
+            <input type="text" name="name">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="memo">メモ</label>
+          </td>
+          <td>
+            <textarea name="memo" rows="5" cols="20">
+              
+            </textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            
+          </td>
+          <td>
+            <input type="submit">
+          </td>
+        </tr>
+      </table>
+    </form>
+    <hr>
     <table>
       <tr>
-        <th>Id</th>
         <th>名前</th>
-        <th>メール</th>
-        <th>年齢</th>
-        <th>メモ(Tel.)</th>
+        <th>メモ</th>
+        <th>日時</th>
       </tr>
       <tr th:each="obj : ${dataList}">
-        <td th:text="${obj.id}"></td>
         <td th:text="${obj.name}"></td>
-        <td th:text="${obj.mail}"></td>
-        <td th:text="${obj.age}"></td>
         <td th:text="${obj.memo}"></td>
+        <td th:text="${obj.date}"></td>
       </tr>
     </table>
-    <div>
-      <a my:mypage="${dataList.getNumber() - 1}">
-        &lt;&lt;Prev
-      </a>
-       | 
-      <a my:mypage="${dataList.getNumber() + 1}">
-        Next&gt;&gt;
-      </a>
-    </div>
   </body>
 </html>

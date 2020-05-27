@@ -27,6 +27,22 @@ pre
   padding: 5px 10px;
 }
 
+table.navi
+{
+  background: white;
+  width: 100%;
+}
+
+table.navi tr
+{
+  background: white;
+}
+
+table.navi tr td
+{
+  background: white;
+}
+
 td
 {
   background: #f0f0f0;
