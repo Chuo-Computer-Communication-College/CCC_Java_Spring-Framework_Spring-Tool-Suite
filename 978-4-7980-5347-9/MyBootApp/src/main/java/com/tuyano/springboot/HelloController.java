@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -32,14 +34,14 @@ public class HelloController
     @Autowired
     MyDataRepository mdRepository;
     
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelAndView mav)
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ModelAndView index(ModelAndView mav, Pageable pageable)
     {
-        List<MyData> lstMyData = mdService.getAll();
+        Page<MyData> pgMyData = mdRepository.findAll(pageable);
 
         mav.addObject("title", "Find Page");
         mav.addObject("message", "MyDataのサンプルです。");
-        mav.addObject("dataList", lstMyData);
+        mav.addObject("dataList", pgMyData);
         
         mav.setViewName("index");
         
