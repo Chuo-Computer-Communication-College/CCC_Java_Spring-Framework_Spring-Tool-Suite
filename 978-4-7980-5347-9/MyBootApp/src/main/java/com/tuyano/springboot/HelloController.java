@@ -1,5 +1,7 @@
 package com.tuyano.springboot;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,41 @@ public class HelloController
         mdmRepository.save(mdMongo);
         
         return new ModelAndView("redirect:/");
+    }
+    
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public ModelAndView find(ModelAndView mav)
+    {
+        List<MyDataMongo> lstMyDataMongo = mdmRepository.findAll();
+        
+        mav.addObject("title", "Find Page");
+        mav.addObject("message", "MyDataのサンプルです。");
+        mav.addObject("value", "");
+        mav.addObject("dataList", lstMyDataMongo);
+        
+        mav.setViewName("find");
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    @Transactional(readOnly = false)
+    public ModelAndView search(@RequestParam("find") String param, ModelAndView mav)
+    {
+        if (param == "")
+        {
+            mav = new ModelAndView("redirect:/find");
+        }
+        else
+        {
+            List<MyDataMongo> lstMyDataMongo = mdmRepository.findByName(param);
+
+            mav.addObject("title", "Find Result");
+            mav.addObject("message", "「" + param + "」の検索結果");
+            mav.addObject("value", param);
+            mav.addObject("dataList", lstMyDataMongo);
+        }
+        
+        return mav;
     }
 }
