@@ -2,6 +2,8 @@ package com.tuyano.springboot.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +19,6 @@ public interface MyDataRepository extends JpaRepository<MyData, Long>
     
     @Query("FROM MyData WHERE age > :min AND age < :max")
     public List<MyData> findByAge(@Param("min") int min, @Param("max") int max);
+    
+    public Page<MyData> findAll(Pageable pageable);
 }

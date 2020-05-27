@@ -53,5 +53,14 @@ function callback(result)
         <td th:text="${obj.memo}"></td>
       </tr>
     </table>
+    <div>
+      <a my:mypage="${dataList.getNumber() - 1}">
+        &lt;&lt;Prev
+      </a>
+       | 
+      <a my:mypage="${dataList.getNumber() + 1}">
+        Next&gt;&gt;
+      </a>
+    </div>
   </body>
 </html>
